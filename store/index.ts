@@ -15,7 +15,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       listingsApi.middleware,
-      favoritesApi.middleware
+      favoritesApi.middleware,
     ),
 });
 

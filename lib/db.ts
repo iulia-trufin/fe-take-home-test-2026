@@ -9,7 +9,7 @@ type Data = Listing[];
 export const devdb = () => {
   const db = new LowSync<Listing[]>(
     new JSONFileSync(join(process.cwd() + "/data/db.json")),
-    [] as Data
+    [] as Data,
   );
 
   return db;
