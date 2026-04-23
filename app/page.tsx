@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="p-4">
+    <main className="p-4 bg-black text-white min-h-screen">
       <h1 className="mb-8">
         <strong>
           Cheffelo take-home test (choose <em>one</em> task + optional bonus)

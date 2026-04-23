@@ -13,3 +13,7 @@ p {
 a {
   @apply text-blue-500 underline;
 }
+
+html, body {
+  @apply bg-black text-white;
+}
