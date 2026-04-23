@@ -16,7 +16,7 @@ export const Listings = (props: ListingsProps) => {
 
   return (
     <ul
-      className="grid items-stretch grid-cols-2 gap-4 md:grid-cols-4"
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       {...props}
     >
       {listings.data.map((listing) => (

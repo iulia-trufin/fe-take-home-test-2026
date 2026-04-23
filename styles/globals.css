@@ -11,9 +11,9 @@ p {
 }
 
 a {
-  @apply text-blue-500 underline;
+  @apply text-blue-400 hover:text-blue-300 underline-offset-2;
 }
 
 html, body {
-  @apply bg-black text-white;
+  @apply bg-neutral-950 text-neutral-100;
 }
