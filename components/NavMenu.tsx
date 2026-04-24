@@ -20,9 +20,9 @@ export const NavMenu = () => {
         <Link href="/listings" className={linkStyle("/listings")}>
           Listings
         </Link>
-        {/*<Link href="/favorites" className={linkStyle("/favorites")}>*/}
-        {/*  Favorites*/}
-        {/*</Link>*/}
+        <Link href="/favorites" className={linkStyle("/favorites")}>
+          Favorites
+        </Link>
       </div>
     </nav>
   );
