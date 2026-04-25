@@ -4,9 +4,12 @@ import Link from "next/link";
 
 import { Listings } from "../../components/Listings";
 import { useGetFavoritesQuery } from "../../store/services/favorites";
+import { Toast } from "../../components/Toast";
+import { useToast } from "../../hooks/useToast";
 
 export default function FavoritesPage() {
   const { data, isLoading } = useGetFavoritesQuery();
+  const { message } = useToast();
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -26,7 +29,10 @@ export default function FavoritesPage() {
           No data found
         </div>
       ) : (
-        <Listings data={data.data} />
+        <>
+          <Listings data={data.data} />
+          <Toast message={message} />
+        </>
       )}
     </main>
   );

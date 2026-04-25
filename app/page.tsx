@@ -24,8 +24,7 @@ export default function Home() {
           <p>
             Implement the <code>GET</code>, <code>POST </code>, and{" "}
             <code>DELETE</code> API for the favorites API. The API can interact
-            with the
-            <code>devDb</code> object, which is a Low DB instance.
+            with the <code>devDb</code> object, which is a Low DB instance.
           </p>
           <p>
             Implement the <code>handleAddToFavorites</code> and{" "}
