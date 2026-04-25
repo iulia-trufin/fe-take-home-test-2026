@@ -2,16 +2,16 @@ import { NextResponse } from "next/server";
 import { APIError } from "../../../../types";
 import { devdb } from "../../../../lib/db";
 
-const db = devdb();
-
 export const GET = async (
   _: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) => {
   try {
-    const { id } = params;
+    const { id } = await params;
+    const db = devdb();
     db.read();
-    const fav = db.data.find((fav) => fav.id === id);
+    db.data ||= [];
+    const fav = db.data.find((favorite) => favorite.id === id);
     if (!fav) {
       return NextResponse.json({ message: "Favorite not found" } as APIError, {
         status: 404,
@@ -35,11 +35,13 @@ export const GET = async (
 
 export const DELETE = async (
   _: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) => {
   try {
-    const { id } = params;
+    const { id } = await params;
+    const db = devdb();
     db.read();
+    db.data ||= [];
     const idExists = db.data.some((item) => item.id === id);
     if (!idExists) {
       return NextResponse.json({ message: "Favorite not found" } as APIError, {

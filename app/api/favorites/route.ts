@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import { devdb } from "../../../lib/db";
 import { APIError } from "../../../types";
 
-const db = devdb();
-
 export const GET = async () => {
   try {
+    const db = devdb();
     db.read();
+    db.data ||= [];
     return NextResponse.json(
-      { data: db.data ?? [] },
+      { data: db.data },
       {
         status: 200,
       },
@@ -25,6 +25,7 @@ export const GET = async () => {
 
 export const POST = async (req: Request) => {
   try {
+    const db = devdb();
     const listing = await req.json();
     if (!listing?.id) {
       return NextResponse.json(
@@ -34,6 +35,7 @@ export const POST = async (req: Request) => {
     }
 
     db.read();
+    db.data ||= [];
 
     const idExists = db.data.some((item) => item.id === listing.id);
     if (!idExists) {
@@ -42,7 +44,7 @@ export const POST = async (req: Request) => {
     }
 
     return NextResponse.json(
-      { data: db.data ?? [] },
+      { data: db.data },
       {
         status: 200,
       },
