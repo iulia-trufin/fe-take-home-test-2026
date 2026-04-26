@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useGetFavoritesQuery } from "../store/services/favorites";
 
 export const NavMenu = () => {
   const pathname = usePathname();
+  const { data } = useGetFavoritesQuery();
+  const favoritesCount = data?.data.length ?? 0;
 
   const linkStyle = (path: string) =>
     `text-sm font-medium transition ${
@@ -21,7 +24,7 @@ export const NavMenu = () => {
           Listings
         </Link>
         <Link href="/favorites" className={linkStyle("/favorites")}>
-          Favorites
+          Favorites ({favoritesCount})
         </Link>
       </div>
     </nav>

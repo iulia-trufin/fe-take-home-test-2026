@@ -14,3 +14,5 @@ export interface APIError {
 export interface ListingsResponse {
   data: Listing[];
 }
+
+export type ListingsVariant = "listings" | "favorites";

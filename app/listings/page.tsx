@@ -12,7 +12,11 @@ export default function ListingsPage() {
   const { message } = useToast();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-40 text-neutral-400 text-sm">
+        Warming up the engines...
+      </div>
+    );
   }
   return (
     <main className="flex flex-col gap-6 px-4 py-6">
@@ -31,7 +35,7 @@ export default function ListingsPage() {
         </div>
       ) : (
         <>
-          <Listings data={data.data} />
+          <Listings data={data.data} variant="listings" />
           <Toast message={message} />
         </>
       )}

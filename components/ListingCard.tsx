@@ -1,7 +1,7 @@
 "use client";
 
 import React, { HTMLAttributes } from "react";
-import { Listing } from "../types";
+import { Listing, ListingsVariant } from "../types";
 import {
   useFavoriteListingMutation,
   useUnfavoriteListingMutation,
@@ -11,9 +11,13 @@ import { useToast } from "../hooks/useToast";
 
 interface ListingProps extends HTMLAttributes<HTMLLIElement> {
   listing: Listing;
+  variant?: ListingsVariant;
 }
 
-export const ListingCard = ({ listing }: ListingProps) => {
+export const ListingCard = ({
+  listing,
+  variant = "favorites",
+}: ListingProps) => {
   const [favoriteListing, { isLoading: isAdding }] =
     useFavoriteListingMutation();
   const [unfavoriteListing, { isLoading: isRemoving }] =
@@ -46,9 +50,22 @@ export const ListingCard = ({ listing }: ListingProps) => {
   };
 
   return (
-    <li className="group relative flex flex-col rounded-xl border border-white/10 bg-white/5 p-[1px] transition hover:scale-[1.01]">
+    <li
+      className={`group relative flex flex-col rounded-xl border p-[1px] transition hover:scale-[1.01] ${
+        variant === "listings"
+          ? isFavorited
+            ? "border-yellow-400/60 shadow-[0_0_10px_rgba(250,204,21,0.4)]"
+            : "border-white/10"
+          : "border-white/10"
+      }`}
+    >
       <div className="flex flex-col gap-3 p-5 grow">
-        <p className="text-lg font-semibold">{listing.car}</p>
+        <p className="text-lg font-semibold flex items-center gap-2">
+          {variant === "listings" && isFavorited && (
+            <span className="text-yellow-400">⭐</span>
+          )}
+          {listing.car}
+        </p>
         <p className="text-sm text-neutral-400">{listing.name}</p>
         <p>
           <a href={`tel:${listing.phone}`} className="text-sm">
