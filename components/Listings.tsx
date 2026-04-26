@@ -4,23 +4,21 @@ import React, { HTMLAttributes } from "react";
 
 import { ListingCard } from "./ListingCard";
 import { useGetListingsQuery } from "../store/services/listings";
+import { Listing, ListingsVariant } from "../types";
 
-interface ListingsProps extends HTMLAttributes<HTMLUListElement> {}
+interface ListingsProps extends HTMLAttributes<HTMLUListElement> {
+  data: Listing[];
+  variant?: ListingsVariant;
+}
 
-export const Listings = (props: ListingsProps) => {
-  const { data: listings } = useGetListingsQuery();
-
-  if (!listings) {
-    return null;
-  }
-
+export const Listings = ({ data, variant, ...props }: ListingsProps) => {
   return (
     <ul
-      className="grid items-stretch grid-cols-2 gap-4 md:grid-cols-4"
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       {...props}
     >
-      {listings.data.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
+      {data.map((listing) => (
+        <ListingCard key={listing.id} listing={listing} variant={variant} />
       ))}
     </ul>
   );
